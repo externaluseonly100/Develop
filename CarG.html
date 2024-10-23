@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+}
+/* body{
+    background-color: black;
+} */
+#container{
+    width: 100%;
+    height: 100vh;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#container2{
+    width: 1150px;
+    height: 510px;
+    background:transparent;
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    border-radius: 10px;
+    flex-direction: column;
+}
+.infoPage{
+    height: 150px;
+    width: 300px;
+    padding: 25px 0px;
+    border: 2px solid yellow;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    input{
+        text-align: center;
+        width: 150px;
+    }
+    button{
+        width: 150px;
+    }
+    
+}
+#playerInfo{
+    background-color: rgb(0, 149, 255);
+}
+#result{
+    background-color: rgb(0, 149, 255);
+    z-index: 2;
+    display: none;
+}
+#menu{
+    display: flex;
+    margin: 0px auto;
+}
+.menus{
+    height: 30px;
+    width: 100px;
+    /* border: 1px solid white; */
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    /* position: absolute; */
+    display: flex;
+    /* top: 0px; */
+    .lifeBox{
+        width: 33.3px;
+    }
+    #box1{
+        background-color: red;
+    }
+    #box2{
+        background-color: yellow;
+    }
+    #box3{
+        background-color: green;
+    }
+        /* display: none; */
+}
+#life{
+    border: 1px solid rgb(246, 255, 0);
+}
+.menus1{
+    color: rgb(246, 255, 0);
+    margin: 0px 10px;
+    font-size: 25px;
+}
+#score{
+    width: 50px;
+}
+#outerBox{
+    width: 1150px;
+    height: 480px;
+    border-radius: 10px;
+    position: relative;
+    border: 2px solid yellow;
+    background-color: rgb(7, 11, 18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#car{
+    height: 100px;
+    width: 100px;
+    border: 2px solid red;
+    border-radius: 10px;
+    position: absolute;
+    /* top: 437px;*/ /*bottom end*/
+    /*left: 1113px; */  /*left end*/ 
+    display: none;
+}
+#innerBox{
+    height: 100px;
+    width: 56px;
+    background-color: orangered;
+    position: relative;
+    top: 270px;
+    left: 555px;
+    border-radius: 10px;
+    img{
+        position: relative;
+        height: 100px;
+        width: 56px;
+        border-radius: 10px;
+    }
+    /* #glass{
+        height: 60px;
+        width: 50px;
+        background-color: rgb(171, 210, 224);
+        border-radius: 5px;
+        position: relative;
+        top: 35px;
+        left: 2px;
+        #roof{
+            width: 45px;
+            height: 25px;
+            padding: 10px 0px;
+            background-color: orangered;
+            border-radius: 2px;
+            position: relative;
+            top: 10px;
+            left: 3px;
+            text-align: center;
+            color: white;
+            font-weight: bolder;
+        }
+    } */
+    z-index: 2;
+    display: none;
+}
+#block{
+    height: 20px;
+    width: 30px;
+    padding: 5px 0px;
+    font-weight: bolder;
+    text-align: center;
+    border-radius: 5%;
+    border: 2px solid red;
+    background-color: rgb(54, 54, 202);
+    position: absolute;
+    box-shadow: 1px 1px 10px 10px rgba(255, 191, 0, 0.145);
+    display: none;
+}
+#left{
+    height: 48vh;
+    width: 200px;
+    border: 1px solid white;
+    background-color: rgba(137, 43, 226, 0.307);
+    z-index: 3;
+    position: absolute;
+    top: 25vh;
+}
+#right{
+    height: 48vh;
+    width: 200px;
+    border: 1px solid white;
+    z-index: 3;
+    position: absolute;
+    top: 25vh;
+    right: 0px;
+}
+.btn{
+    height: 25vh;
+    width: 200px;
+    /* border: 1px solid red; */
+    position: absolute;
+}
+#Ltop{
+    top: 0px;
+}
+#Ldown{
+    bottom: 0px;
+}
+#Rtop{
+    top: 0px;
+    right: 0px;
+}
+#Rdown{
+    bottom: 0px;
+    right: 0px;
+}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="container2">
+            <div id="menu">
+                <div class="menus1" class="menus">Score:</div>
+                <div class="menus" id="score">00</div>
+                <div class="menus1" class="menus">Timer:</div>
+                <div class="menus" id="timer">00:00:00</div>
+                <div class="menus1" class="menus">Health:</div>
+                <div class="menus" id="life">
+                    <div class="lifeBox" id="box1"></div>
+                    <div class="lifeBox" id="box2"></div>
+                    <div class="lifeBox" id="box3"></div>
+                </div>
+            </div>
+            <div id="outerBox">
+                <div class="infoPage" id="playerInfo">
+                    <h1>Player</h1><br>
+                    <h3>Name:</h3>
+                    <input id="infoName" type="text" name="name" required><br>
+                    <button onclick="submit()">Submit</button>
+                    <p id="para"></p>
+                </div>
+                <div class="infoPage" id="result">
+                    <h1 id="carEventResult"></h1><br>
+                    <h2 id="resultPlayerName"></h2><br>
+                    <h3 id="resultPlayerScore"></h3>
+                </div>
+                <div id="innerBox">
+                    <img src="Car - Copy.jpg" alt="">
+                    <div id="glass">
+                        <div id="roof">0</div>
+                    </div>
+                </div>
+                <div id="block"></div>
+            </div>
+        </div>
+        <div id="car"></div>
+    </div>
+    <!-- <div id="left"></div>
+    <div id="right"></div>
+    <div class="btn" id="Ldown"></div>
+    <div class="btn" id="Rdown"></div>
+    <div class="btn" id="Ltop"></div>
+    <div class="btn" id="Rtop"></div> -->
+</body>
+<script>
+    let run=true;
+let block_x;
+let block_y;
+let deg=0;
+let car_x=555;
+let car_y=270;
+let count=0;
+let score=0;
+let miss=0;
+let fuel=0;
+let block_count=0;
+var playerName="";
+let start=0;
+
+function submit(){
+    playerName= document.getElementById("infoName").value;
+    start= document.getElementById("infoName").value;
+    if(start!=""){
+        document.getElementById("playerInfo").style.display="none";
+        start=1;
+    }
+    else{
+        document.getElementById("para").style.color="red";
+        document.getElementById("para").innerText="Required";
+        setTimeout(()=>
+            document.getElementById("para").innerText="",3000
+        )
+    }
+
+
+console.log(`Start:${start}`);
+if(start==1){console.log("hii");
+    document.getElementById("outerBox").style.display="block";
+    document.getElementById("block").style.display="block";
+    document.getElementById("innerBox").style.display="block";
+    let box=document.getElementById("innerBox");
+    document.addEventListener("keydown", eventt=>{
+        if(run){
+            //TOUCH SCREEN
+            // let touchL=0;
+            // document.getElementById("left").addEventListener("click", e=>{
+            //     console.log("clicked");
+            //     car_x-=10;
+            //     box.style.left=`${car_x}px`;
+            //     box.style.rotate=`270deg`;
+            // });
+
+            // console.log(event.key);
+            if(event.key=="ArrowRight"){
+                if(car_x>=20 && car_x<=1065 && car_y>0 && car_y<380){
+                    car_x+=10;
+                    box.style.left=`${car_x}px`;
+                    box.style.rotate=`90deg`;
+                }
+            }
+            if(event.key=="ArrowLeft"){
+                if(car_x>=20 && car_x<=1065 && car_y>0 && car_y<380){
+                    car_x-=10;
+                    box.style.left=`${car_x}px`;
+                    box.style.rotate=`270deg`;
+                }touchL=0;
+            }
+            if(event.key=="ArrowUp"){
+                if(car_x>=20 && car_x<=1065 && car_y>0 && car_y<380){
+                    car_y-=10;
+                    box.style.top=`${car_y}px`;
+                    box.style.rotate=`0deg`;
+                }
+            }
+            if(event.key=="ArrowDown"){
+                if(car_x>=20 && car_x<=1065 && car_y>0 && car_y<380){
+                    car_y+=10;
+                    box.style.top=`${car_y}px`;
+                    box.style.rotate=`180deg`;
+                }
+            }
+
+            if(car_x>block_x-80 && car_x<=block_x+55 && car_y>=block_y-100 && car_y<=block_y+34){
+                    document.getElementById("block").style.background="transparent";
+                    count ++;
+            }
+            // else block.style.background="pink";
+        }    
+    });
+    let block=document.getElementById("block");
+    setInterval(fun, 3750);
+    function fun(){
+        if(run){
+            if(count>0){
+                score ++;
+                // document.getElementById("roof").innerText=`${score}`;
+                count=0;
+                
+                if(miss>=1 && miss<=3){
+                    miss =1;
+                    
+                    document.getElementById("box3").style.background="green";
+                    document.getElementById("box2").style.background="yellow";
+                }
+            }
+            // TERMINATION
+            else {
+                miss ++;
+                if(miss==2){
+                    document.getElementById("box3").style.background="transparent";
+                }
+                if(miss==3){
+                    document.getElementById("box2").style.background="transparent";
+                }
+                if(miss==4 || car_x==15 || car_x==1075 || car_y==0 ||car_y==380){
+                    run=false;//TERMINATION CONDITION
+
+                    if(car_x==15 || car_x==1075 || car_y==0 ||car_y==380){
+                        document.getElementById("carEventResult").innerText="~Collided~";
+                        document.getElementById("box3").style.background="transparent";
+                        document.getElementById("box2").style.background="transparent";
+                    }
+                    else{
+                        document.getElementById("carEventResult").innerText="~Out of fuel~";
+                    }
+
+                    document.getElementById("box1").style.background="transparent";
+                    document.getElementById("outerBox").style.border="2px solid red";
+
+                    //RESULT PAGE
+                    document.getElementById("innerBox").style.display="none";
+                    document.getElementById("block").style.display="none";
+                    document.getElementById("outerBox").style.display="flex";
+                    document.getElementById("outerBox").style.justifyContent="center";
+                    document.getElementById("outerBox").style.alignItems="center";
+                    document.getElementById("result").style.display="block";
+
+                    document.getElementById("resultPlayerName").innerText=`${playerName}`;
+                    document.getElementById("resultPlayerScore").innerText=`Your score is: ${score*10}`;
+
+
+                    // FILE HANDLING
+                    // const input={
+                    //     dd:new Date().getDate(),
+                    //     mm:new Date().getMonth(),
+                    //     yy:new Date().getFullYear(),
+                    //     hr:new Date().getHours(),
+                    //     min:new Date().getMinutes(),
+                    //     sec:new Date().getSeconds()
+                    // };
+                    
+                    // const fs = require("fs");
+                    // fs.appendFileSync("./Game.txt", `${input.dd}/${input.mm}/${input.yy} `);
+                    // fs.appendFileSync("./Game.txt", `${input.hr}:${input.min}:${input.sec} `);
+                    // fs.appendFileSync("./Game.txt", `${playerName}, ${_score}\n`);
+                }
+            }
+
+            block.style.display="block";
+            block_count ++;
+            block.innerText=block_count;
+
+            document.getElementById("car").style.display="none";
+            // let dt= new Date().getSeconds();
+            block_y=Math.floor(Math.random()*420);
+            block_x=Math.floor(Math.random()*1100);
+            // block_y=420;
+            // block_x=1100;
+
+            
+            block.style.top=`${block_y}px`;
+            block.style.left=`${block_x}px`;
+            block.style.background="rgb(54, 54, 202)";
+
+            //SCORE IN MENU BAR
+            let _score=score*10;
+            if(_score<10)
+                document.getElementById("score").innerText=`0${score*10}`;
+            else document.getElementById("score").innerText=`${score*10}`;
+
+            //AUTO CAR MOVE
+            // setInterval(function carMove(){
+            //     car_x ++;
+            //     document.getElementById("innerbox").style.top=car_x;
+            //     car_y ++;
+            // },10);
+        }
+    }
+    //TIMER
+    let hr=0, min=0, sec=0;
+    setInterval(function timer(){console.log(`X:${car_x} Y:${car_y}`);
+        if(run){
+            sec ++;
+            if(sec==60){
+                min ++;
+                sec=0;
+            }
+            if(min==60)
+                hr ++;
+
+            if(sec<10 && min<10)
+                document.getElementById("timer").innerText=`0${hr}:0${min}:0${sec}`;
+            if(sec>=10 && min<10)
+                document.getElementById("timer").innerText=`0${hr}:0${min}:${sec}`;
+            if(sec<10 && min>=10)
+                document.getElementById("timer").innerText=`0${hr}:${min}:0${sec}`;
+            if(sec>=10 && min>=10)
+                document.getElementById("timer").innerText=`0${hr}:${min}:${sec}`;
+        }
+    },1000);
+    
+}
+}
+</script>
+</html>
+
